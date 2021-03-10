@@ -4,44 +4,34 @@ import { Input, Form, Button } from "antd"
 import { connect } from "react-redux"
 import { createStopWatch } from "../../store/actionCreator"
 
-const mapStateToProps = (state) => {
- return {
-     stop: state.stopwatch.stopwatchs
- }
-}
-
-export const CreateStopWatch = connect(mapStateToProps, {createStopWatch})(({
+export const CreateStopWatch = connect(null, {createStopWatch})(({
     createStopWatch,
-    stop
+    stopwatchs
 }) => {
 
     useEffect(() => {
-        console.log(stop)
+        const date = Date.now()
+        console.log(date)
     })
 
     const onFinish = (values) => {
         const refValues = {
             ...values,
-            startDate: new Date()
+            startDate: Date.now()
         }
         createStopWatch(refValues)
     }
 
     return (
+        <>
         <Form
             name="create-stopwatch"
             layout="inline"
             onFinish={onFinish}
         >
             <Form.Item 
-                name="stopwatchName" 
+                name="name" 
                 label="Stop Watch"
-                rules={[
-                    {
-                        required: true,
-                        message:"Please input stopwatch name"
-                    }
-                ]}
             >
                 <Input type="text"/>
             </Form.Item>
@@ -49,5 +39,6 @@ export const CreateStopWatch = connect(mapStateToProps, {createStopWatch})(({
               <Button htmlType='submite'>Create</Button>  
             </Form.Item>
         </Form>
+        </>
     )
 })

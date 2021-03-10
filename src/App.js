@@ -1,17 +1,21 @@
 // import { Grid } from "antd";
-import { Row } from "antd";
-import { Provider } from "react-redux";
+import { connect } from "react-redux";
 import { CreateStopWatch } from "./components/CreateStopWatch/CreateStopWatch";
-import { store } from "./store";
+import { StopWatch } from "./components/StopWatch/StopWatch";
 
-function App() {
-  return (
-  <Provider store={store}>
-    <Row align='middle' justify='center' style={{height: '100vh'}}>
-        <CreateStopWatch/>
-    </Row>
-  </Provider>
-  );
+const mapStateToProps = (state) => {
+  return {
+    stopwatchs: state.stopwatch.stopwatchs
 }
+}
+
+const App= connect(mapStateToProps)(({stopwatchs}) => {
+  return (
+    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+        <CreateStopWatch/>
+        {stopwatchs.map((el)=> <StopWatch key={el.startDate} stopwatch={el}/>)}
+    </div>
+  );
+})
 
 export default App;
