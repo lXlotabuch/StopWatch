@@ -13,7 +13,7 @@ const App= connect(mapStateToProps)(({stopwatchs}) => {
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
         <CreateStopWatch/>
-        {stopwatchs.map((el)=> <StopWatch key={el.startDate} stopwatch={el}/>)}
+        {stopwatchs.map((el)=> <StopWatch key={el.id} stopwatch={el}/>)}
     </div>
   );
 })

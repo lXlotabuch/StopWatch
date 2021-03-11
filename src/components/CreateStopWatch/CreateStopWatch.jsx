@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import 'antd/dist/antd.css'
 import { Input, Form, Button } from "antd"
 import { connect } from "react-redux"
@@ -6,18 +6,12 @@ import { createStopWatch } from "../../store/actionCreator"
 
 export const CreateStopWatch = connect(null, {createStopWatch})(({
     createStopWatch,
-    stopwatchs
 }) => {
-
-    useEffect(() => {
-        const date = Date.now()
-        console.log(date)
-    })
 
     const onFinish = (values) => {
         const refValues = {
             ...values,
-            startDate: Date.now()
+            timer: 0
         }
         createStopWatch(refValues)
     }
